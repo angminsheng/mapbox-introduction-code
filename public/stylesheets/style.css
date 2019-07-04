@@ -1,0 +1,20 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
+
+a {
+  color: #00B7FF; }
+
+#map {
+  width: 90vw;
+  height: 60vh;
+  margin: 40px auto; }
+
+.popup {
+  text-align: center; }
+
+.popup img {
+  width: 100px;
+  height: 100px; }
+
+/*# sourceMappingURL=style.css.map */

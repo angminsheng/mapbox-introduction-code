@@ -1,2 +1,43 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
+
+<form action="/add-wonder" method="POST">
+
+  <label for="name">name:</label>
+  <input type="text" name="name">
+  <label for="imageUrl">image-url:</label>
+  <input type="text" name="imageUrl">
+  <label for="longitude">latitude</label>
+  <input type="number" step="0.0001" name="latitude">
+  <label for="longitude">longitude</label>
+  <input type="number" step="0.0001" name="longitude">
+  <button>add wonder</button>
+</form>
+<div id='map'></div>
+
+
+
+<script>
+  mapboxgl.accessToken = "{{ accessToken }}";
+  let map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/streets-v9'
+  });
+
+  axios.get('http://localhost:3000/api/places').then((response) => {
+    let places = response.data
+    places.forEach(place => {
+      let popup = new mapboxgl.Popup({ offset: 0, className: 'my-class' })
+        .setHTML(`<div class="popup"><p>${place.name}</p><img src="${place.imageUrl}" alt=""></div>`)
+        .setMaxWidth("none")
+
+      let marker = new mapboxgl.Marker()
+        .setLngLat(place.location.coordinate)
+        .setPopup(popup)
+        .addTo(map);
+
+    })
+  }
+  )
+
+</script>
